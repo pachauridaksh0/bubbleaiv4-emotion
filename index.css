@@ -1,0 +1,152 @@
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+:root {
+    /* DEFAULT THEME: Black Mode (Deep Void) */
+    --bg-primary: #050505; 
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #121212;
+    --border-color: rgba(255,255,255,0.1);
+    
+    --bg-interactive-hover: rgba(255, 255, 255, 0.05);
+    --text-primary: #f4f4f5; /* Zinc-100 */
+    --text-secondary: #a1a1aa; /* Zinc-400 */
+    --prose-text: #d4d4d8;
+    --prose-code-bg: rgba(255, 255, 255, 0.05);
+    
+    --mermaid-bg: #18181b;
+    --mermaid-primary: #27272a;
+    --mermaid-text-primary: #f4f4f5;
+    --mermaid-text-secondary: #a1a1aa;
+}
+
+/* GRAY MODE (Zinc/Slate) */
+html[data-theme="gray"] {
+    --bg-primary: #18181b; /* Zinc 900 */
+    --bg-secondary: #27272a; /* Zinc 800 */
+    --bg-tertiary: #3f3f46; /* Zinc 700 */
+    --border-color: rgba(255,255,255,0.12);
+    
+    --mermaid-bg: #27272a;
+    --mermaid-primary: #3f3f46;
+}
+
+/* LIGHT MODE (High Contrast / Apple-Inspired) */
+html[data-theme="light"] {
+    --bg-primary: #f2f2f2;          /* Very light gray/Off-white, NOT pure white */
+    --bg-secondary: #ffffff;        /* White cards/panels for contrast */
+    --bg-tertiary: #e5e5e5;         /* Slightly darker inputs */
+    --border-color: #d1d1d6;        /* Clear, visible border */
+    
+    --bg-interactive-hover: rgba(0, 0, 0, 0.05);
+    --text-primary: #000000;        /* Pure Black for maximum contrast */
+    --text-secondary: #454545;      /* Dark Gray, highly visible */
+    --prose-text: #111111;          /* Almost black */
+    --prose-code-bg: #e5e5e5;
+
+    --mermaid-bg: #f2f2f2;
+    --mermaid-primary: #ffffff;
+    --mermaid-text-primary: #000000;
+    --mermaid-text-secondary: #454545;
+}
+
+/* Hide Aurora in Light Mode for clarity */
+html[data-theme="light"] .aurora-background {
+    display: none !important;
+}
+
+.aurora-bg {
+    position: relative;
+    background-color: var(--bg-primary);
+    overflow: hidden;
+    isolation: isolate; /* Create new stacking context */
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+    content: '';
+    position: absolute;
+    z-index: -10; /* Put it behind the content */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150vmax;
+    height: 150vmax;
+    background-image:
+        radial-gradient(circle at center, #6366f1 0%, transparent 40%),
+        radial-gradient(circle at center, #8b5cf6 0%, transparent 40%);
+    background-size: 60% 60%, 50% 50%;
+    background-position: 10% 90%, 90% 10%;
+    background-repeat: no-repeat;
+    animation: aurora 30s linear infinite;
+    opacity: 0.15; /* Reduced opacity for ambient feel */
+    mix-blend-mode: plus-lighter;
+}
+
+.aurora-bg::after {
+    width: 120vmax;
+    height: 120vmax;
+    background-image:
+        radial-gradient(circle at center, #ec4899 0%, transparent 35%),
+        radial-gradient(circle at center, #3b82f6 0%, transparent 40%);
+    background-size: 50% 50%, 40% 40%;
+    background-position: 50% 50%, 20% 20%;
+    animation-duration: 25s;
+    animation-direction: reverse;
+    opacity: 0.1; /* Reduced opacity */
+}
+
+/* Citation Styling - Enhanced Button-like appearance */
+.citation {
+    vertical-align: super;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #3b82f6; /* blue-500 for better visibility on light/dark */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    background-color: rgba(59, 130, 246, 0.1); 
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.citation:hover {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #2563eb; 
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Prose overrides for chat messages */
+.prose-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--prose-text);
+}
+.prose-text p {
+    margin-bottom: 0.75em;
+}
+.prose-text h1, .prose-text h2, .prose-text h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+    color: var(--text-primary);
+}
+.prose-text ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+.prose-text ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+}
+.prose-text li {
+    margin-bottom: 0.25em;
+}

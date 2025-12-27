@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10 30 L50 10 L90 30 L50 50 Z' fill='%233b82f6'/%3E%3Cpath d='M10 30 L10 70 L50 90 L50 50 Z' fill='%233b82f6' fill-opacity='0.7'/%3E%3Cpath d='M50 50 L50 90 L90 70 L90 30 Z' fill='%233b82f6' fill-opacity='0.5'/%3E%3C/svg%3E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            borderRadius: {
+              '5xl': '2.5rem',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              'bg-primary': 'var(--bg-primary)',
+              'bg-secondary': 'var(--bg-secondary)',
+              'bg-tertiary': 'var(--bg-tertiary)',
+              'border-color': 'var(--border-color)',
+              'text-primary': 'var(--text-primary)',
+              'text-secondary': 'var(--text-secondary)',
+              'interactive-hover': 'rgba(255, 255, 255, 0.08)',
+              'primary-start': '#6366f1', 
+              'primary-end': '#ec4899', 
+              'accent-cyan': '#06b6d4',
+              'accent-pink': '#f472b6',
+              'accent-violet': '#8b5cf6',
+            },
+            animation: {
+              'shine': 'shine 2s linear infinite',
+              'marquee': 'marquee 40s linear infinite',
+              'blink': 'blink 1s step-end infinite',
+              'aurora': 'aurora 30s linear infinite',
+              'gradient-x': 'gradient-x 3s ease infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              shine: {
+                '0%': { backgroundPosition: '200% 0' },
+                '100%': { backgroundPosition: '-200% 0' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              'blink': {
+                'from, to': { opacity: '1' },
+                '50%': { opacity: '0' },
+              },
+               aurora: {
+                from: { transform: 'rotate(0deg)' },
+                to: { transform: 'rotate(360deg)' },
+              },
+              'gradient-x': {
+                '0%, 100%': {
+                    'background-size': '200% 200%',
+                    'background-position': 'left center'
+                },
+                '50%': {
+                    'background-size': '200% 200%',
+                    'background-position': 'right center'
+                },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              'pulse-glow': {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0.5' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Fallback variables to prevent flash of unstyled content */
+      :root {
+        --bg-primary: #050505;
+        --bg-secondary: #0a0a0a;
+        --bg-tertiary: #121212;
+        --border-color: rgba(255,255,255,0.1);
+        --text-primary: #f4f4f5;
+        --text-secondary: #a1a1aa;
+        --mermaid-bg: #0a0a0a;
+        --mermaid-primary: #121212;
+        --mermaid-text-primary: #ffffff;
+        --mermaid-text-secondary: #a1a1aa;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "@google/genai": "https://esm.sh/@google/genai@^1.19.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.12",
+    "prism-react-renderer/": "https://esm.sh/prism-react-renderer@^2.3.1/",
+    "prism-react-renderer": "https://esm.sh/prism-react-renderer@^2.3.1",
+    "@heroicons/react/": "https://esm.sh/@heroicons/react@^2.2.0/",
+    "@supabase/supabase-js": "https://jspm.dev/@supabase/supabase-js",
+    "@monaco-editor/react": "https://esm.sh/@monaco-editor/react@^4.6.2",
+    "react-split-grid": "https://esm.sh/react-split-grid@^1.0.4",
+    "react-chartjs-2": "https://esm.sh/react-chartjs-2@^5.3.0",
+    "chart.js": "https://esm.sh/chart.js@^4.5.1",
+    "sonner": "https://esm.sh/sonner@^2.0.7",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "jszip": "https://esm.sh/jszip@3.10.1",
+    "@xenova/transformers": "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2"
+  }
+}
+</script>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+    window.initializeMermaidTheme = () => {
+        if (!window.mermaid) return;
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Inter, sans-serif',
+            themeVariables: {
+                background: '#0a0a0a',
+                primaryColor: '#121212',
+                primaryTextColor: '#ffffff',
+                lineColor: '#6366f1',
+                textColor: '#a1a1aa',
+                nodeBorder: '#8b5cf6',
+            }
+        });
+    };
+    setTimeout(() => {
+        if(window.initializeMermaidTheme) window.initializeMermaidTheme();
+    }, 10);
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
